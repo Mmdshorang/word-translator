@@ -2,7 +2,7 @@
 
 A clean and modern web application for managing and displaying word translations.
 
-> Designed for both administrators (who manage translations) and public users (who view them). Built with TypeScript, Vite, and React.
+> Designed for both administrators (to manage translations) and public users (to view them). Built with TypeScript, Vite, and React.
 
 ---
 
@@ -21,19 +21,22 @@ A clean and modern web application for managing and displaying word translations
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
-- [Tailwind CSS](https://tailwindcss.com/) (optional if used)
-- ESLint + Prettier for clean code
+- [Tailwind CSS](https://tailwindcss.com/) *(if used)*
+- ESLint + Prettier for clean and consistent code
 
 ---
 
 ## 🚀 Getting Started
 
-### ✅ Prerequisites
+> Whether you're cloning this project or starting fresh, follow the steps below to get up and running.
 
-- **Node.js ≥ 22**  
-  ⚠️ Please make sure you're using Node.js version **22 or above**.
+---
 
-To check your Node version:
+### 📌 System Requirements
+
+- ✅ **Node.js v22 or later is required**
+
+To verify your current Node version:
 
 ```bash
 node -v
