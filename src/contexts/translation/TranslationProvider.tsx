@@ -50,7 +50,9 @@ export const TranslationProvider = ({ children }: PropsWithChildren) => {
     }));
   }, []);
 
-  const deleteKeyword = useCallback((id: string) => {
+const deleteKeyword = useCallback((id: string) => {
+    console.log("Context: Deleting keyword with id:", id);
+
     setState((prev) => ({
       ...prev,
       keywords: prev.keywords.filter((k) => k.id !== id),
@@ -66,13 +68,30 @@ export const TranslationProvider = ({ children }: PropsWithChildren) => {
       }).filter(Boolean) as Keyword[],
     }));
   }, []);
-
+  const updateTranslation = useCallback((keywordId: string, langCode: string, value: string) => {
+    setState((prev) => ({
+      ...prev,
+      keywords: prev.keywords.map((k) => {
+        if (k.id === keywordId) {
+          return {
+            ...k,
+            translations: {
+              ...k.translations,
+              [langCode]: value,
+            },
+          };
+        }
+        return k;
+      }),
+    }));
+  }, []);
   const contextValue: ITranslationContext = {
     state,
     addKeyword,
     editKeyword,
     deleteKeyword,
     reorderKeywords,
+    updateTranslation,
   };
 
   return (

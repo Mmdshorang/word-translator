@@ -1,28 +1,23 @@
+import { KeywordList } from "../components/ui/KeywordList/KeywordList";
 import { useTranslations } from "../contexts/translation/useTranslations";
 
-
 export const DashboardPage = () => {
-  const { state, addKeyword } = useTranslations();
+  const { addKeyword } = useTranslations();
 
   const handleAddNew = () => {
-    // Using a prompt for simplicity, we will build a proper form later.
     const newKey = prompt("Enter the new keyword:");
-    if (newKey) {
-      addKeyword(newKey);
+    if (newKey && newKey.trim() !== '') {
+      addKeyword(newKey.trim());
     }
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: '800px', margin: '2rem auto' }}>
       <h1>Translation Management</h1>
-      <button onClick={handleAddNew}>+ Add Keyword</button>
-      <ul>
-        {state.keywords.sort((a,b) => a.order - b.order).map(keyword => (
-          <li key={keyword.id}>
-            {keyword.key}
-          </li>
-        ))}
-      </ul>
+      <button onClick={handleAddNew} style={{ marginBottom: '1rem' }}>
+        + Add Keyword
+      </button>
+      <KeywordList />
     </div>
   );
 };

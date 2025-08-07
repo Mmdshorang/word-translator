@@ -8,3 +8,7 @@ export interface Keyword {
   translations: Translations;
   order: number;
 }
+
+export  interface KeywordItemProps {
+  keyword: Keyword;
+}
