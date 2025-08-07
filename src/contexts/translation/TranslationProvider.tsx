@@ -7,8 +7,10 @@ import {
 import { TranslationContext } from './TranslationContext';
 import { INITIAL_STATE } from '../../data/initialState';
 import type { ITranslationContext, TranslationState, Keyword } from '../../types';
+import { useSnackbar } from '../snackbar/useSnackbar';
 
 export const TranslationProvider = ({ children }: PropsWithChildren) => {
+  const { showSnackbar } = useSnackbar();
   const [state, setState] = useState<TranslationState>(() => {
     try {
       const stored = localStorage.getItem('translation-data');
@@ -23,23 +25,36 @@ export const TranslationProvider = ({ children }: PropsWithChildren) => {
   }, [state]);
 
   const addKeyword = useCallback((key: string) => {
-    const newOrder =
-      state.keywords.length > 0
-        ? Math.max(...state.keywords.map((k) => k.order)) + 1
-        : 1;
+    setState((prev) => {
+      // Check if the keyword already exists (case-insensitive)
+      const keyExists = prev.keywords.some(
+        k => k.key.toLowerCase() === key.toLowerCase()
+      );
 
-    const newKeyword: Keyword = {
-      id: new Date().getTime().toString(),
-      key,
-      translations: {},
-      order: newOrder,
-    };
+      if (keyExists) {
+        showSnackbar(`Keyword "${key}" already exists!`, 'error');
+        return prev; // Return previous state without changes
+      }
 
-    setState((prev) => ({
-      ...prev,
-      keywords: [...prev.keywords, newKeyword],
-    }));
-  }, [state.keywords]);
+      const newOrder =
+        prev.keywords.length > 0
+          ? Math.max(...prev.keywords.map((k) => k.order)) + 1
+          : 1;
+
+      const newKeyword: Keyword = {
+        id: new Date().getTime().toString(),
+        key,
+        translations: {},
+        order: newOrder,
+      };
+
+      showSnackbar(`Keyword "${key}" added successfully!`, 'success');
+      return {
+        ...prev,
+        keywords: [...prev.keywords, newKeyword],
+      };
+    });
+  }, [showSnackbar]);
 
   const editKeyword = useCallback((id: string, newKey: string) => {
     setState((prev) => ({
@@ -50,13 +65,14 @@ export const TranslationProvider = ({ children }: PropsWithChildren) => {
     }));
   }, []);
 
-const deleteKeyword = useCallback((id: string) => {
+  const deleteKeyword = useCallback((id: string) => {
     console.log("Context: Deleting keyword with id:", id);
 
     setState((prev) => ({
       ...prev,
       keywords: prev.keywords.filter((k) => k.id !== id),
     }));
+    showSnackbar('Keyword deleted successfully!', 'error');
   }, []);
 
   const reorderKeywords = useCallback((newOrder: string[]) => {
@@ -84,6 +100,7 @@ const deleteKeyword = useCallback((id: string) => {
         return k;
       }),
     }));
+    showSnackbar('Translation updated!', 'info');
   }, []);
   const contextValue: ITranslationContext = {
     state,

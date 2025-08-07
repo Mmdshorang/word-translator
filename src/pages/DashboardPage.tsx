@@ -47,7 +47,9 @@ export const DashboardPage = () => {
                 </div>
             </header>
             {/* Pass the selected language down to the list */}
+       <div className={styles.listContainer}>
         <KeywordList currentLang={currentLang} filter={filter} />
+      </div>
         </div>
     );
 };

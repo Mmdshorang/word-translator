@@ -33,3 +33,7 @@
 .deleteButton:hover {
   background-color: #dc2626;
 }
+/* Add this to src/components/ui/KeywordItem/KeywordItem.module.css */
+.untranslated {
+  color: #ef4444; /* A red color */
+}

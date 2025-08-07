@@ -42,7 +42,9 @@ export const KeywordItem = ({ keyword, currentLang }: KeywordItemProps) => {
 
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners} className={styles.itemContainer}>
-            <span className={styles.keyText}>{keyword.key}</span>
+            <span className={`${styles.keyText} ${!keyword.translations[currentLang] ? styles.untranslated : ''}`}>
+                {keyword.key}
+            </span>
             <input
                 type="text"
                 value={translation}

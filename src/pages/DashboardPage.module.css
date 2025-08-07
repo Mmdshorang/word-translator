@@ -54,3 +54,10 @@
   border-radius: 8px;
   font-size: 1rem;
 }
+
+/* Add this to src/pages/DashboardPage.module.css */
+.listContainer {
+  max-height: 500px; /* Or any height you prefer */
+  overflow-y: auto;  /* Show scrollbar only when needed */
+  padding-right: 10px; /* To prevent scrollbar from overlapping content */
+}
