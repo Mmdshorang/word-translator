@@ -5,8 +5,8 @@ import {
   type PropsWithChildren,
 } from 'react';
 import { TranslationContext } from './TranslationContext';
-import { INITIAL_STATE } from '../data/initialState';
-import type { ITranslationContext, TranslationState, Keyword } from '../types';
+import { INITIAL_STATE } from '../../data/initialState';
+import type { ITranslationContext, TranslationState, Keyword } from '../../types';
 
 export const TranslationProvider = ({ children }: PropsWithChildren) => {
   const [state, setState] = useState<TranslationState>(() => {
