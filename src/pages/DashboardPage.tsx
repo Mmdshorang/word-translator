@@ -1,8 +1,14 @@
-import { KeywordList } from "../components/ui/KeywordList/KeywordList";
-import { useTranslations } from "../contexts/translation/useTranslations";
+import { useState } from 'react'; // <-- Import useState
+
+import { KeywordList } from '../components/ui/KeywordList/KeywordList';
+import styles from './DashboardPage.module.css'; // <-- Let's add some styles
+import { useTranslations } from '../contexts/translation/useTranslations';
 
 export const DashboardPage = () => {
-  const { addKeyword } = useTranslations();
+  const { state, addKeyword } = useTranslations();
+  const { languages } = state;
+  // Local state to manage the currently selected language for editing
+  const [currentLang, setCurrentLang] = useState(languages[0] || '');
 
   const handleAddNew = () => {
     const newKey = prompt("Enter the new keyword:");
@@ -12,12 +18,29 @@ export const DashboardPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '2rem auto' }}>
-      <h1>Translation Management</h1>
-      <button onClick={handleAddNew} style={{ marginBottom: '1rem' }}>
-        + Add Keyword
-      </button>
-      <KeywordList />
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1>Translation Management</h1>
+        <div className={styles.controls}>
+          {/* Language Switcher UI */}
+          <div className={styles.langSwitcher}>
+            {languages.map(lang => (
+              <button
+                key={lang}
+                className={`${styles.langButton} ${currentLang === lang ? styles.active : ''}`}
+                onClick={() => setCurrentLang(lang)}
+              >
+                {lang.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <button onClick={handleAddNew} className={styles.addButton}>
+            + Add Keyword
+          </button>
+        </div>
+      </header>
+      {/* Pass the selected language down to the list */}
+      <KeywordList currentLang={currentLang} />
     </div>
   );
 };

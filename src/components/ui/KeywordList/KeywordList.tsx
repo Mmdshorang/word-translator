@@ -2,8 +2,10 @@ import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { KeywordItem } from '../KeywordItem/KeywordItem';
 import { useTranslations } from '../../../contexts/translation/useTranslations';
+import type { KeywordListProps } from '../../../types';
 
-export const KeywordList = () => {
+
+export const KeywordList = ({ currentLang }: KeywordListProps) => {
   const { state, reorderKeywords } = useTranslations();
   const { keywords } = state;
 
@@ -27,7 +29,7 @@ export const KeywordList = () => {
       <SortableContext items={keywords.map(k => k.id)} strategy={verticalListSortingStrategy}>
         <div>
           {keywords.map((keyword) => (
-            <KeywordItem key={keyword.id} keyword={keyword} />
+          <KeywordItem key={keyword.id} keyword={keyword} currentLang={currentLang} />
           ))}
         </div>
       </SortableContext>

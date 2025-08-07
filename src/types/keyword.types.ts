@@ -12,3 +12,6 @@ export interface Keyword {
 export  interface KeywordItemProps {
   keyword: Keyword;
 }
+export interface KeywordListProps {
+  currentLang: string;
+}
