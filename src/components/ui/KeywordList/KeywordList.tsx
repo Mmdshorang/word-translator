@@ -5,10 +5,12 @@ import { useTranslations } from '../../../contexts/translation/useTranslations';
 import type { KeywordListProps } from '../../../types';
 
 
-export const KeywordList = ({ currentLang }: KeywordListProps) => {
+export const KeywordList = ({ currentLang,  filter}: KeywordListProps) => {
   const { state, reorderKeywords } = useTranslations();
   const { keywords } = state;
-
+  const filteredKeywords = keywords.filter(k =>
+    k.key.toLowerCase().includes(filter.toLowerCase())
+  );
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && active.id !== over.id) {
@@ -28,8 +30,8 @@ export const KeywordList = ({ currentLang }: KeywordListProps) => {
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={keywords.map(k => k.id)} strategy={verticalListSortingStrategy}>
         <div>
-          {keywords.map((keyword) => (
-          <KeywordItem key={keyword.id} keyword={keyword} currentLang={currentLang} />
+         {filteredKeywords.map((keyword) => (
+            <KeywordItem key={keyword.id} keyword={keyword} currentLang={currentLang} />
           ))}
         </div>
       </SortableContext>

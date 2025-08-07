@@ -14,4 +14,5 @@ export  interface KeywordItemProps {
 }
 export interface KeywordListProps {
   currentLang: string;
+   filter: string;
 }
