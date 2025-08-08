@@ -1,17 +1,15 @@
-// File path: src/App.tsx
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { DashboardPage } from './pages/DashboardPage';
 import { PublicViewPage } from './pages/PublicViewPage';
 import Snackbar from './components/ui/Snackbar/Snackbar';
-import './App.css'; 
+import MainNav from './components/layout/MainNav/MainNav';
+
+
 
 function App() {
   return (
     <>
-      <nav className="main-nav">
-        <Link to="/">Public View</Link>
-        <Link to="/admin">Admin Dashboard</Link>
-      </nav>
+      <MainNav />
       <main>
         <Routes>
           <Route path="/" element={<PublicViewPage />} />
