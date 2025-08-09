@@ -1,0 +1,27 @@
+.scrollContainer {
+  height: calc(100vh - 200px);
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 0.8rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.key {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.translation {
+  color: #555;
+  font-size: 0.9rem;
+}

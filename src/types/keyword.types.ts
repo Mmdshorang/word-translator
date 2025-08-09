@@ -9,8 +9,9 @@ export interface Keyword {
   order: number;
 }
 
-export  interface KeywordItemProps {
-  keyword: Keyword;
+export interface KeywordItemProps {
+    keyword: Keyword;
+    currentLang: string;
 }
 export interface KeywordListProps {
   currentLang: string;
