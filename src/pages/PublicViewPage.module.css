@@ -1,5 +1,5 @@
 .pageWrapper {
-  max-width: 900px; /* A bit wider to accommodate more cards */
+  max-width: 900px;
   margin: 2rem auto;
   font-family: sans-serif;
   color: #333;
@@ -52,7 +52,7 @@
 }
 
 .card {
-  background-color: #f9fafb; /* A slightly off-white for the inner cards */
+  background-color: #f9fafb; 
   padding: 1.5rem;
   border: 1px solid #e5e7eb;
   border-radius: 12px;

@@ -1,7 +1,9 @@
 import { useState } from 'react';
-
 import styles from './PublicViewPage.module.css';
 import { useTranslations } from '../contexts/translation/useTranslations';
+import KeywordCardList from '../components/ui/KeywordCardList/KeywordCardList';
+import LanguageSwitcher from '../components/ui/LanguageSwitcher/LanguageSwitcher';
+
 
 export const PublicViewPage = () => {
   const { state } = useTranslations();
@@ -9,35 +11,19 @@ export const PublicViewPage = () => {
   const [selectedLang, setSelectedLang] = useState(languages[0] || '');
 
   return (
-    // This wrapper centers the card on the page
     <div className={styles.pageWrapper}>
-      {/* This is the main white card */}
       <div className={styles.cardContainer}>
         <header className={styles.header}>
           <h1>Word Translations</h1>
-          <div className={styles.langSwitcher}>
-            {languages.map(lang => (
-              <button
-                key={lang}
-                className={`${styles.langButton} ${selectedLang === lang ? styles.active : ''}`}
-                onClick={() => setSelectedLang(lang)}
-              >
-                {lang.toUpperCase()}
-              </button>
-            ))}
-          </div>
+          <LanguageSwitcher
+            languages={languages}
+            selectedLang={selectedLang}
+            onLanguageChange={setSelectedLang}
+            label="Language:"
+          />
         </header>
 
-        <div className={styles.cardGrid}>
-          {keywords.sort((a, b) => a.order - b.order).map(keyword => (
-            <div key={keyword.id} className={styles.card}>
-              <p className={styles.key}>{keyword.key}</p>
-              <p className={styles.translation}>
-                {keyword.translations[selectedLang] || 'No translation yet'}
-              </p>
-            </div>
-          ))}
-        </div>
+        <KeywordCardList keywords={keywords} selectedLang={selectedLang} />
       </div>
     </div>
   );
