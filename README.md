@@ -59,14 +59,3 @@ This is a simple web application for managing and viewing keyword translations, 
 
 ---
 
-## Data Structure and Logic Choices
-
-(این بخش مستقیماً در تسک خواسته شده است)
-
-The application state is managed using **React's Context API** as required by the task. This choice is suitable for this project's scale, avoiding the boilerplate of more complex libraries like Redux while providing a centralized state management solution.
-
-The data is stored in a single JSON object in `localStorage`. The core of this object is a `keywords` array. Each keyword is an object with a unique `id`, a `key`, an `order` property for sorting, and a nested `translations` object. This structure was chosen for a few key reasons:
-
--   **Array of Objects**: Using an array for `keywords` makes it straightforward to map over for rendering and to manage ordering with the `order` property.
--   **Nested `translations` Object**: Storing translations as a `{ lang: 'value' }` map allows for quick and efficient lookups (`keyword.translations.en`) without needing to iterate through another array.
--   **`dnd-kit`** was chosen for drag-and-drop due to its modern architecture, performance, and accessibility features.
